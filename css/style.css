@@ -191,7 +191,7 @@ body {
 .bmi .bmi-box__right--button:hover {
   background-color: white;
   color: #2c2c2c;
-  scale: 1.01;
+  scale: 1.05;
 }
 .bmi .bmi-box__right--output {
   display: block;
