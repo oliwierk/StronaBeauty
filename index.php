@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css" />
 </head>
 
@@ -92,10 +93,31 @@ if (isset($_POST['wzrost']) && isset($_POST['waga'])) {
 
         $query = "INSERT INTO wynik (id, bmi_id, data_pomiaru, wynik) VALUES (NULL, '$bmi_id', '$data_pomiaru', '$wynik')";
 
-        if (mysqli_query($conn, $query)) {
-            echo "<p class='bmi-box__right--output'>Twoje BMI wynosi: " . $wynik . " i zostało zapisane w bazie danych.</p>";
+      if (mysqli_query($conn, $query)) {
+            // Wyświetlanie komunikatu BMI
+            switch ($bmi_id) {
+                case 1:
+                    echo "<p class='bmi-box__right--output'>Twoje BMI wynosi: " . $wynik . " - Masz niedowagę!</p>";
+                    echo "<p class='bmi-box__right--output'>Skonsultuj się z lekarzem lub dietetykiem, aby poprawić swoją wagę.</p>";
+                    break;
+                case 2:
+                    echo "<p class='bmi-box__right--output'>Twoje BMI wynosi: " . $wynik . " - Twoja waga jest prawidłowa.</p>";
+                    echo "<p class='bmi-box__right--output'>Kontynuuj zdrowy styl życia, dbając o aktywność fizyczną i zdrową dietę.</p>";
+                    break;
+                case 3:
+                    echo "<p class='bmi-box__right--output'>Twoje BMI wynosi: " . $wynik . " - Masz nadwagę!</p>";
+                    echo "<p class='bmi-box__right--output'>Skonsultuj się z lekarzem lub dietetykiem, aby schudnąć i poprawić zdrowie.</p>";
+                    break;
+                case 4:
+                    echo "<p class='bmi-box__right--output'>Twoje BMI wynosi: " . $wynik . " - Masz otyłość!</p>";
+                    echo "<p class='bmi-box__right--output'>Skonsultuj się z lekarzem lub dietetykiem, aby podjąć działania zmierzające do utraty wagi i polepszenia zdrowia.</p>";
+                    break;
+                default:
+                    echo "<p class='bmi-box__right--output'>Nieprawidłowy zakres BMI.</p>";
+                    break;
+            }
         } else {
-            echo "<p class='bmi-box__right--output'>Błąd zapisu do bazy danych: </p>";
+            echo "<p class='bmi-box__right--output'>Błąd zapisu do bazy danych.</p>";
         }
     } else {
         echo "<p class='bmi-box__right--output'>Błąd: Wzrost i waga muszą być liczbami dodatnimi.</p>";
@@ -110,8 +132,8 @@ if (isset($_POST['wzrost']) && isset($_POST['waga'])) {
 </div>
     </section>
     <footer></footer>
+    <script src="https://kit.fontawesome.com/d1641b1208.js" crossorigin="anonymous"></script>
 </body>
 
 
-<script src="https://kit.fontawesome.com/d1641b1208.js" crossorigin="anonymous"></script>
 </html>
