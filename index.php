@@ -33,8 +33,8 @@
             <p class="header-box__text--main swing-in-top-fwd">Glamour Haven</p>
             <p class="header-box__text--second">Odkryj swoje piękno w naszym salonie.</p>
             <a href="#services">
-            <i class="header-box__icon fa-solid fa-arrow-down"></i>
-</a>
+                <i class="header-box__icon fa-solid fa-arrow-down"></i>
+            </a>
         </div>
     </header>
     <section id="services" class="services wrapper">
@@ -56,27 +56,27 @@
     </section>
     <section id="bmi" class="bmi">
         <div class="wrapper">
-        <h2 class="bmi__title">Sprawdż swoje BMI!</h2>
-        <div class="bmi-box">
-            <div class="bmi-box__left">
-                <img src="./img/forms.svg" alt="ZDJECIE" class="bmi-box__left--img">
-            </div>
-            <div class="bmi-box__right">
+            <h2 class="bmi__title">Sprawdż swoje BMI!</h2>
+            <div class="bmi-box">
+                <div class="bmi-box__left">
+                    <img src="./img/forms.svg" alt="ZDJECIE" class="bmi-box__left--img">
+                </div>
+                <div class="bmi-box__right">
 
-            <form action="index.php" method="post">
-                <p>Wpisz swój wzrost:</p>
-                <input type="text" class="bmi-box__right--input" name="wzrost">
-                <p>Wpisz swoją wagę:</p>
-                <input type="text" class="bmi-box__right--input" name="waga">
-                <button type="submit" class="bmi-box__right--button">Oblicz!</button>
-            </form>
+                    <form action="index.php" method="post">
+                        <p>Wpisz swój wzrost:</p>
+                        <input type="text" class="bmi-box__right--input" name="wzrost">
+                        <p>Wpisz swoją wagę:</p>
+                        <input type="text" class="bmi-box__right--input" name="waga">
+                        <button type="submit" class="bmi-box__right--button">Oblicz!</button>
+                    </form>
                     <?php 
 		$conn = mysqli_connect('localhost','root','','bmi');
 if (isset($_POST['wzrost']) && isset($_POST['waga'])) {
     $wzrost = $_POST['wzrost'];
     $waga = $_POST['waga'];
 
-    if ($wzrost > 0 && $waga > 0) {
+
         $wynik = $waga / ($wzrost * $wzrost / 10000);
         $wynik = round($wynik, 2);
         $data_pomiaru = date('y-m-d');
@@ -94,7 +94,6 @@ if (isset($_POST['wzrost']) && isset($_POST['waga'])) {
         $query = "INSERT INTO wynik (id, bmi_id, data_pomiaru, wynik) VALUES (NULL, '$bmi_id', '$data_pomiaru', '$wynik')";
 
       if (mysqli_query($conn, $query)) {
-            // Wyświetlanie komunikatu BMI
             switch ($bmi_id) {
                 case 1:
                     echo "<p class='bmi-box__right--output'>Twoje BMI wynosi: " . $wynik . " - Masz niedowagę!</p>";
@@ -122,14 +121,13 @@ if (isset($_POST['wzrost']) && isset($_POST['waga'])) {
     } else {
         echo "<p class='bmi-box__right--output'>Błąd: Wzrost i waga muszą być liczbami dodatnimi.</p>";
     }
-}
 
 ?>
+                </div>
             </div>
+
+
         </div>
-
-
-</div>
     </section>
     <footer></footer>
     <script src="https://kit.fontawesome.com/d1641b1208.js" crossorigin="anonymous"></script>
